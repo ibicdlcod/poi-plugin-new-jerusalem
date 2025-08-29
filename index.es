@@ -2,17 +2,20 @@ import React, { Component } from 'react'
 import { Button, TextArea, ButtonGroup, Icon } from "@blueprintjs/core";
 import { connect } from 'react-redux'
 import { shell } from 'electron'
-async function getData() {
-  const url = "https://www.baidu.com";
+async function getData(data) {
+  const url = "http://127.0.0.1:3411";
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "POST",
+      body: data
+    });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
     const result = await response.text();
     return result;
   } catch (error) {
-    let errorStr = "Error: ";
+    let errorStr = "错误: ";
     return errorStr + error.message;
   }
 }
@@ -87,7 +90,7 @@ export const reactClass = connect(state => ({
 	document.getElementById("demo").innerHTML = "导出中...";
         const result = this.exportFleet()
         //shell.openExternal(`https://jervis.vercel.app/zh-CN/?predeck=${result}`)
-        getData().then(
+        getData(result).then(
 	    function(value) {
 	        document.getElementById("demo").innerHTML = value;
 	    },
@@ -109,13 +112,11 @@ export const reactClass = connect(state => ({
             <div style={{ marginLeft: "10px" }}>
                 <ButtonGroup>
                     <Button onClick={this.exportJervis}>
-                        导出至cyberfleet
+                        导出至新游
                     </Button>
                 </ButtonGroup>
                 <h2>舰队导出状态：</h2>
 		<p id="demo">未导出</p>
-                <h2>舰队导出文本</h2>
-                <TextArea style={{ height: "100px" }} placeholder="点击任意按钮加载" className=":readonly" fill={true} value={result} ></TextArea>
             </div>
         )
     }
