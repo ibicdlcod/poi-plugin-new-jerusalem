@@ -1,6 +1,6 @@
 {
   "name": "poi-plugin-new-jerusalem",
-  "version": "0.0.2-beta.2",
+  "version": "0.0.3",
   "description": "Plugin for migrating from kancolle to new game",
   "main": "main.js",
   "keywords": [
