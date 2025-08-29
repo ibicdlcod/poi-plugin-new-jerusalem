@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, TextArea, ButtonGroup, Icon } from "@blueprintjs/core";
 import { connect } from 'react-redux'
 import { shell } from 'electron'
+
 export const windowMode = false;
 export const reactClass = connect(state => ({
     nickname: state.info.basic.api_nickname,
@@ -73,7 +74,7 @@ export const reactClass = connect(state => ({
         const result = this.exportFleet()
         shell.openExternal(`https://jervis.vercel.app/zh-CN/?predeck=${result}`)
     }
-
+    
     help = () => {
         shell.openExternal(`https://github.com/KyoMiko/poi-plugin-fleet-export`)
     }
@@ -93,6 +94,8 @@ export const reactClass = connect(state => ({
                         导出至cyberfleet
                     </Button>
                 </ButtonGroup>
+                <h2>舰队导出文本</h2>
+                <TextArea style={{ height: "100px" }} placeholder="点击任意按钮加载" className=":readonly" fill={true} value={result} ></TextArea>
             </div>
         )
     }
