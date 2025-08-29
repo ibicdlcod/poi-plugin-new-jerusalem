@@ -117,6 +117,7 @@ export const reactClass = connect(state => ({
                 </ButtonGroup>
                 <h2>舰队导出状态：</h2>
 		<p id="demo">未导出</p>
+                <h2>警告：请不要通过技术手段修改你老婆的数据或者导入别人的老婆，违反者可以被封号</h2>
             </div>
         )
     }
