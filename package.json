@@ -1,6 +1,6 @@
 {
   "name": "poi-plugin-new-jerusalem",
-  "version": "0.0.2-beta.1",
+  "version": "0.0.2-beta.2",
   "description": "Plugin for migrating from kancolle to new game",
   "main": "main.js",
   "keywords": [
@@ -16,7 +16,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/ibicdlcod/poi-plugin-new-jerusalem"
-  }, 
+  },
   "license": "MIT",
   "poiPlugin": {
     "title": "Migrate",
