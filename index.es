@@ -2,7 +2,20 @@ import React, { Component } from 'react'
 import { Button, TextArea, ButtonGroup, Icon } from "@blueprintjs/core";
 import { connect } from 'react-redux'
 import { shell } from 'electron'
-
+async function getData() {
+  const url = "https://www.baidu.com";
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const result = await response.text();
+    return result;
+  } catch (error) {
+    let errorStr = "Error: ";
+    return errorStr + error.message;
+  }
+}
 export const windowMode = false;
 export const reactClass = connect(state => ({
     nickname: state.info.basic.api_nickname,
@@ -71,12 +84,17 @@ export const reactClass = connect(state => ({
     }
 
     exportJervis = () => { 
+	document.getElementById("demo").innerHTML = "导出中...";
         const result = this.exportFleet()
-        shell.openExternal(`https://jervis.vercel.app/zh-CN/?predeck=${result}`)
-    }
-    
-    help = () => {
-        shell.openExternal(`https://github.com/KyoMiko/poi-plugin-fleet-export`)
+        //shell.openExternal(`https://jervis.vercel.app/zh-CN/?predeck=${result}`)
+        getData().then(
+	    function(value) {
+	        document.getElementById("demo").innerHTML = value;
+	    },
+	    function(error) {
+	        document.getElementById("demo").innerHTML = "导出失败";
+	    }
+	);
     }
     
     handleActivityAirbaseChange = (event) => {
@@ -94,6 +112,8 @@ export const reactClass = connect(state => ({
                         导出至cyberfleet
                     </Button>
                 </ButtonGroup>
+                <h2>舰队导出状态：</h2>
+		<p id="demo">未导出</p>
                 <h2>舰队导出文本</h2>
                 <TextArea style={{ height: "100px" }} placeholder="点击任意按钮加载" className=":readonly" fill={true} value={result} ></TextArea>
             </div>
